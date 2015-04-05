@@ -1,3 +1,3 @@
 //= require react/react
 
-//= require_tree .
+//= require_tree ./components
