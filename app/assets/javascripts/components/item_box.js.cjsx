@@ -3,7 +3,7 @@ window.LRItemBox = React.createClass
     <div className="item-box">
       <h1>I am the ItemBox</h1>
       <LRItemList items={@state.items}/>
-      <LRItemForm />
+      <LRItemForm submitCallback={@_createItem}/>
     </div>
 
   getInitialState: ->
@@ -14,6 +14,18 @@ window.LRItemBox = React.createClass
 
   componentDidMount: ->
     @_fetchData()
+
+  _createItem: (args) ->
+    $.ajax
+      url: '/api/items',
+      type: 'POST',
+      dataType: 'json',
+      data: args,
+      success: (data) =>
+        # @setState items: data.items
+        console.log 'success'
+      error: (xhr, status, err) =>
+        console.error status, err.toString()
 
   _fetchData: ->
     $.ajax

@@ -12,4 +12,4 @@ window.LRItemForm = React.createClass
     tags = React.findDOMNode(@refs.tags).value.trim()
     return unless name and tags
 
-    console.log name, tags
+    @props.submitCallback name: name, tags: tags
