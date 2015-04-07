@@ -7,10 +7,7 @@ window.LRItemBox = React.createClass
     </div>
 
   getInitialState: ->
-    items: [
-      {name: 'x-wing', id: 5},
-      {name: 'z95', id: 4},
-    ]
+    items: []
 
   componentDidMount: ->
     @_fetchData()
@@ -20,10 +17,9 @@ window.LRItemBox = React.createClass
       url: '/api/items',
       type: 'POST',
       dataType: 'json',
-      data: args,
+      data: {item: args},
       success: (data) =>
-        # @setState items: data.items
-        console.log 'success'
+        @setState items: data.items
       error: (xhr, status, err) =>
         console.error status, err.toString()
 

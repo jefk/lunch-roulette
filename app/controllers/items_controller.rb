@@ -3,21 +3,21 @@ class ItemsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def index
-    render json: _data
+    render json: { items: Item.all.to_a }
   end
 
   def create
-    render json: {}, status: :created
+    item = Item.new item_params
+    if item.save
+      render json: { items: Item.all.to_a }, status: :created
+    else
+      render json: { errors: item.errors }, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def _data
-    {
-      items: [
-        {name: 'tie bomber', id: 45},
-        {name: 'tie advanced', id: 43},
-      ]
-    }
+  def item_params
+    params.require(:item).permit(:name)
   end
 end
