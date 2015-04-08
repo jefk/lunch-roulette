@@ -1,13 +1,11 @@
 window.LRItemList = React.createClass
   render: ->
     <div className="item-list">
-      <ul>
-        {@items()}
-      </ul>
+      {@items()}
     </div>
 
   items: ->
     @props.items.map (item) ->
-      <li key={item.id}>
+      <div className="item" key={item.id}>
         {item.name}
-      </li>
+      </div>
