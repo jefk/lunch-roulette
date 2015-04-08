@@ -1,7 +1,7 @@
 window.LRItemForm = React.createClass
   render: ->
     <form className="item-form" noValidate="novalidate" onSubmit={@handleSubmit}>
-      <input type="email" placeholder="Carmine's" ref="item"/>
+      <input type="email" placeholder="carmine's @greenpoint @pizza" ref="item"/>
       <input type="submit" value="Add it" />
     </form>
 
