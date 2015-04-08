@@ -3,6 +3,7 @@
   "dependencies": {
     "react": "latest",
     "zepto": "latest",
-    "cookies-js": "latest"
+    "cookies-js": "latest",
+    "normalize-css": "latest"
   }
 }

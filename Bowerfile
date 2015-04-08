@@ -3,3 +3,5 @@
 asset 'react'
 asset 'zepto'
 asset 'cookies-js'
+
+asset 'normalize-css'
