@@ -1,15 +1,15 @@
 window.LRItemForm = React.createClass
   render: ->
-    <form className="item-form" onSubmit={@handleSubmit}>
-      <input type="text" placeholder="Carmine's" ref="name"/>
-      <input type="text" placeholder="greenpoint pizza" ref="tags"/>
+    <form className="item-form" noValidate="novalidate" onSubmit={@handleSubmit}>
+      <input type="email" placeholder="Carmine's" ref="item"/>
       <input type="submit" value="Add it" />
     </form>
 
   handleSubmit: (e) ->
     e.preventDefault()
-    name = React.findDOMNode(@refs.name).value.trim()
-    tags = React.findDOMNode(@refs.tags).value.trim()
-    return unless name and tags
+    rawInput = React.findDOMNode(@refs.item).value.trim()
 
-    @props.submitCallback name: name, tags: tags
+    parser = new models.ItemParser rawInput
+    return unless parser.isValid()
+
+    @props.submitCallback name: parser.name(), tags: parser.tags()
