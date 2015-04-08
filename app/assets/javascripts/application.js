@@ -1,4 +1,5 @@
 //= require zepto/zepto
+//= require cookies-js/dist/cookies
 
 //= require react/react
 

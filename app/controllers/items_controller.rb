@@ -1,7 +1,4 @@
 class ItemsController < ApplicationController
-  # TODO: !!!! use csrf tokens !!!!
-  skip_before_filter :verify_authenticity_token, :only => [:create]
-
   def index
     render json: { items: Item.all.to_a }
   end
