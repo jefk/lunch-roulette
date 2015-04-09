@@ -4,17 +4,17 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new item_params
-    if item.save
+    creation = ItemCreation.new item_params
+    if creation.save
       render json: { items: Item.all.decorate }, status: :created
     else
-      render json: { errors: item.errors }, status: :unprocessable_entity
+      render json: { errors: creation.errors }, status: :unprocessable_entity
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name)
+    params.require(:item).permit(:name, tags: [])
   end
 end

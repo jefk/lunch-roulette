@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -15,6 +14,8 @@ gem 'therubyracer'
 gem 'sprockets-coffee-react'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'spring'
