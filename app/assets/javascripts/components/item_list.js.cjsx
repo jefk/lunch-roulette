@@ -6,6 +6,7 @@ window.LRItemList = React.createClass
 
   items: ->
     @props.items.map (item) ->
-      <div className="item" key={item.id}>
-        {item.name}
+      <div className="item-row" key={item.id}>
+        <p className="item-name">{item.name}</p>
+        <p className="item-tags">{item.tags}</p>
       </div>

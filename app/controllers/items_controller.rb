@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   def index
-    render json: { items: Item.all.to_a }
+    render json: { items: Item.all.decorate }
   end
 
   def create
     item = Item.new item_params
     if item.save
-      render json: { items: Item.all.to_a }, status: :created
+      render json: { items: Item.all.decorate }, status: :created
     else
       render json: { errors: item.errors }, status: :unprocessable_entity
     end
