@@ -4,11 +4,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    creation = ItemCreation.new item_params
-    if creation.save
+    factory = ItemFactory.new item_params
+    if factory.run
       render json: { items: Item.all.decorate }, status: :created
     else
-      render json: { errors: creation.errors }, status: :unprocessable_entity
+      render json: { errors: factory.errors }, status: :unprocessable_entity
     end
   end
 

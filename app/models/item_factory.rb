@@ -1,11 +1,11 @@
-class ItemCreation
+class ItemFactory
   attr_reader :params
 
   def initialize(params)
     @params = params || {}
   end
 
-  def save
+  def run
     params[:tags].each do |tag_name|
       item.tags.where(name: tag_name).first_or_initialize
     end
