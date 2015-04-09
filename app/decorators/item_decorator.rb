@@ -3,6 +3,7 @@ class ItemDecorator < Draper::Decorator
 
   def as_json(options = {})
     {
+      id: id,
       name: name,
       tags: tag_string,
     }
