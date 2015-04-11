@@ -14,7 +14,7 @@ class ItemFactory
 
   def tags
     params[:tags].map do |tag_name|
-      Tag.where(name: tag_name).first_or_initialize
+      Tag.where(name: tag_name.downcase).first_or_initialize
     end
   end
 
