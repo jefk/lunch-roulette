@@ -19,6 +19,7 @@ class ItemFactory
   end
 
   def item
+    # TODO: is this right? existing tags will be overwritten
     @item ||= Item.where(name: params[:name]).first_or_initialize
   end
 end
