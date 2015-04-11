@@ -28,10 +28,10 @@ window.LRItemBox = React.createClass
     $.ajax
       url: '/api/items'
       dataType: 'json'
-      success: (data) =>
-        @setState items: data.items
-      error: (xhr, status, err) =>
-        console.error status, err.toString()
+    .done (data) =>
+      @setState items: data.items
+    .fail (xhr, status, err) =>
+      console.error status, err.toString()
 
   _csrfToken: ->
     @__csrf ?= $('meta[name=csrf-token]').attr('content')
