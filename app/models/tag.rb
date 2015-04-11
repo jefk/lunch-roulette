@@ -1,3 +1,3 @@
 class Tag < ActiveRecord::Base
-  validates :name, unique: true
+  validates :name, uniqueness: true
 end
