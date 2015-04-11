@@ -12,4 +12,8 @@ window.LRItemForm = React.createClass
     parser = new models.ItemParser rawInput
     return unless parser.isValid()
 
-    @props.submitCallback name: parser.name(), tags: parser.tags()
+    promise = @props.submitCallback(name: parser.name(), tags: parser.tags())
+    promise.done(@_clear)
+
+  _clear: ->
+    console.log 'clear'

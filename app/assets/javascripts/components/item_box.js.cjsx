@@ -19,10 +19,10 @@ window.LRItemBox = React.createClass
       dataType: 'json'
       data: {item: args}
       headers: {'X-CSRF-Token': @_csrfToken()}
-      success: (data) =>
-        @setState items: data.items
-      error: (xhr, status, err) =>
-        console.error status, err.toString()
+    .done (data) =>
+      @setState items: data.items
+    .fail (xhr, status, err) =>
+      console.error status, err.toString()
 
   _fetchData: ->
     $.ajax

@@ -2,7 +2,7 @@
   "name": "dsl-generated dependencies",
   "dependencies": {
     "react": "latest",
-    "zepto": "latest",
+    "jquery": "latest",
     "cookies-js": "latest",
     "normalize-css": "latest"
   }
