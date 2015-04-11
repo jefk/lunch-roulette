@@ -6,13 +6,17 @@ class ItemFactory
   end
 
   def run
-    params[:tags].each do |tag_name|
-      item.tags.where(name: tag_name).first_or_initialize
-    end
+    item.tags = tags
     item.save
   end
 
   private
+
+  def tags
+    params[:tags].map do |tag_name|
+      Tag.where(name: tag_name).first_or_initialize
+    end
+  end
 
   def item
     @item ||= Item.where(name: params[:name]).first_or_initialize
