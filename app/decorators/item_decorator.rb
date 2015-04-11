@@ -12,6 +12,6 @@ class ItemDecorator < Draper::Decorator
   private
 
   def tag_string
-    %w|greenpoint pizza|.map { |t| "@#{t}" }.join(' ')
+    tags.map { |t| "@#{t.name}" }.join(' ')
   end
 end
