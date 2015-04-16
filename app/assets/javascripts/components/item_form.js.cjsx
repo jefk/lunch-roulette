@@ -13,7 +13,7 @@ window.LRItemForm = React.createClass
     return unless parser.isValid()
 
     @props
-      .submitCallback(name: parser.name(), tags: parser.tags())
+      .newItemDidSubmit(name: parser.name(), tags: parser.tags())
       .done(@_clear)
 
   _clear: ->

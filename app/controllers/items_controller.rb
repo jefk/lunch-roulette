@@ -1,8 +1,4 @@
 class ItemsController < ApplicationController
-  def index
-    render json: { items: Item.all.decorate }
-  end
-
   def create
     factory = ItemFactory.new item_params
     if factory.run

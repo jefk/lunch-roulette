@@ -3,7 +3,7 @@ window.LRItemBox = React.createClass
     <div className="item-box">
       <h1>I am the ItemBox</h1>
       <LRItemList items={@state.items}/>
-      <LRItemForm submitCallback={@_createItem}/>
+      <LRItemForm newItemDidSubmit={@_createItem}/>
     </div>
 
   getInitialState: ->
@@ -24,10 +24,14 @@ window.LRItemBox = React.createClass
     .fail (xhr, status, err) =>
       console.error status, err.toString()
 
-  _fetchData: ->
+  _fetchData: (args) ->
+    args ?= {tags: []}
     $.ajax
-      url: '/api/items'
+      url: '/api/searches'
+      type: 'POST'
       dataType: 'json'
+      data: {search: args}
+      headers: {'X-CSRF-Token': @_csrfToken()}
     .done (data) =>
       @setState items: data.items
     .fail (xhr, status, err) =>
