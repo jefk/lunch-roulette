@@ -4,6 +4,7 @@ window.LRItemBox = React.createClass
       <h1>I am the ItemBox</h1>
       <LRItemList items={@state.items}/>
       <LRItemForm newItemDidSubmit={@_createItem}/>
+      <LRItemSearch newSearchDidSubmit={@_fetchData}/>
     </div>
 
   getInitialState: ->
