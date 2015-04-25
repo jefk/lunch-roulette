@@ -31,7 +31,7 @@ window.LRItemBox = React.createClass
       url: '/api/searches'
       type: 'POST'
       dataType: 'json'
-      data: {search: args}
+      data: args
       headers: {'X-CSRF-Token': @_csrfToken()}
     .done (data) =>
       @setState items: data.items

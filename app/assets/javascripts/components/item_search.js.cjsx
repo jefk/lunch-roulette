@@ -13,7 +13,7 @@ window.LRItemSearch = React.createClass
     return unless tags.length > 0
 
     @props
-      .newSearchDidSubmit tags
+      .newSearchDidSubmit tags: tags
       .done @_clear
 
   _clear: ->
