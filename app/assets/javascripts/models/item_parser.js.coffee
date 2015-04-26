@@ -2,7 +2,7 @@ class models.ItemParser
   constructor: (@rawInput) ->
 
   name: ->
-    @__name ?= @_parts()[0]
+    @__name ?= @rawInput.split('@')[0]?.trim()
 
   tags: ->
     @__tags ?= @_unique @_parts()[1..]
@@ -11,9 +11,9 @@ class models.ItemParser
     @name() and @tags().length > 0
 
   _parts: ->
-    @__parts ?= (@_sanitize(part) for part in @rawInput.split('@') when part.trim().length > 0)
+    @__parts ?= (@_normalize(part) for part in @rawInput.split('@') when part.trim().length > 0)
 
-  _sanitize: (tag) ->
+  _normalize: (tag) ->
     tag.trim().toLowerCase().replace(/ /g, '')
 
   _unique: (arr) ->
