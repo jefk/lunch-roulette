@@ -5,5 +5,5 @@ window.LRItemList = React.createClass
     </div>
 
   items: ->
-    @props.items.map (item) ->
-      <LRItem item={item} key={item.id} />
+    @props.items.map (item) =>
+      <LRItem item={item} key={item.id} itemId={item.id} events={@props.events} />
