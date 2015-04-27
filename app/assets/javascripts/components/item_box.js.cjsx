@@ -5,7 +5,7 @@ window.LRItemBox = React.createClass
     <div className="item-box">
       <h1>I am the ItemBox</h1>
       <LRItemList items={@state.items}/>
-      <LRItemForm newItemDidSubmit={@_createItem}/>
+      <LRItemForm events={@events}/>
       <LRItemSearch events={@events}/>
     </div>
 
@@ -18,6 +18,9 @@ window.LRItemBox = React.createClass
     @events.on 'search:new', (event, searchParams) =>
       @_fetchData searchParams
 
+    @events.on 'item:new', (events, itemParams) =>
+      @_createItem itemParams
+
   _createItem: (args) ->
     $.ajax
       url: '/api/items'
@@ -27,6 +30,7 @@ window.LRItemBox = React.createClass
       headers: {'X-CSRF-Token': @_csrfToken()}
     .done (data) =>
       @setState items: data.items
+      @events.trigger 'item:complete'
     .fail (xhr, status, err) =>
       console.error status, err.toString()
 

@@ -5,6 +5,9 @@ window.LRItemForm = React.createClass
       <input type="submit" value="Add it" />
     </form>
 
+  componentDidMount: ->
+    @props.events.on 'item:complete', => @_clear()
+
   formDidSubmit: (e) ->
     e.preventDefault()
     rawInput = React.findDOMNode(@refs.item).value.trim()
@@ -12,9 +15,7 @@ window.LRItemForm = React.createClass
     parser = new models.ItemParser rawInput
     return unless parser.isValid()
 
-    @props
-      .newItemDidSubmit(name: parser.name(), tags: parser.tags())
-      .done(@_clear)
+    @props.events.trigger 'item:new', name: parser.name(), tags: parser.tags()
 
   _clear: ->
     React.findDOMNode(@refs.item).value = ''
