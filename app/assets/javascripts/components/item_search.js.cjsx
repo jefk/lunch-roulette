@@ -5,6 +5,9 @@ window.LRItemSearch = React.createClass
       <input type="submit" value="Search" />
     </form>
 
+  componentDidMount: ->
+    @props.events.on 'search:complete', => @_clear()
+
   formDidSubmit: (e) ->
     e.preventDefault()
     rawInput = React.findDOMNode(@refs.search).value.trim()
@@ -12,9 +15,7 @@ window.LRItemSearch = React.createClass
     tags = rawInput.split /\s+/
     return unless tags.length > 0
 
-    @props
-      .newSearchDidSubmit tags: tags
-      .done @_clear
+    @props.events.trigger 'search:new', tags: tags
 
   _clear: ->
     React.findDOMNode(@refs.search).value = ''

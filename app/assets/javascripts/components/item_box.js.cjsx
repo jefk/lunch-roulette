@@ -1,10 +1,12 @@
 window.LRItemBox = React.createClass
+  events: $({})
+
   render: ->
     <div className="item-box">
       <h1>I am the ItemBox</h1>
       <LRItemList items={@state.items}/>
       <LRItemForm newItemDidSubmit={@_createItem}/>
-      <LRItemSearch newSearchDidSubmit={@_fetchData}/>
+      <LRItemSearch events={@events}/>
     </div>
 
   getInitialState: ->
@@ -12,6 +14,9 @@ window.LRItemBox = React.createClass
 
   componentDidMount: ->
     @_fetchData()
+
+    @events.on 'search:new', (event, searchParams) =>
+      @_fetchData searchParams
 
   _createItem: (args) ->
     $.ajax
@@ -35,6 +40,7 @@ window.LRItemBox = React.createClass
       headers: {'X-CSRF-Token': @_csrfToken()}
     .done (data) =>
       @setState items: data.items
+      @events.trigger 'search:complete'
     .fail (xhr, status, err) =>
       console.error status, err.toString()
 
