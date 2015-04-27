@@ -8,6 +8,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item = Item.find params[:id]
+    if item.destroy
+      render json: { items: Item.all.decorate }, status: :ok
+    else
+      render json: { errors: item.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def item_params
