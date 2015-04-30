@@ -3,7 +3,7 @@
   "dependencies": {
     "react": "latest",
     "jquery": "latest",
-    "cookies-js": "latest",
+    "parse-js-sdk": "latest",
     "normalize-css": "latest"
   }
 }

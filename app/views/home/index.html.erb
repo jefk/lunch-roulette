@@ -1,5 +1,6 @@
 <div id="content" />
 
 <script type="text/javascript">
+  Parse.initialize('<%= ENV['PARSE_KEY_1'] %>', '<%= ENV['PARSE_KEY_2'] %>');
   React.render(React.createElement(LRItemBox, null), document.getElementById('content'));
 </script>

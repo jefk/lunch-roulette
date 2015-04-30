@@ -2,6 +2,6 @@
 
 asset 'react'
 asset 'jquery'
-asset 'cookies-js'
+asset 'parse-js-sdk'
 
 asset 'normalize-css'

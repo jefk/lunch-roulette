@@ -15,7 +15,10 @@ window.LRItemForm = React.createClass
     parser = new models.ItemParser rawInput
     return unless parser.isValid()
 
-    @props.events.trigger 'item:new', name: parser.name(), tags: parser.tags()
+    @props.events.trigger 'item:new',
+      name: parser.name()
+      tags: parser.tags()
+      visible: true
 
   _clear: ->
     React.findDOMNode(@refs.item).value = ''

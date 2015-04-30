@@ -25,17 +25,15 @@ window.LRItemBox = React.createClass
       @_deleteItem itemId
 
   _createItem: (args) ->
-    $.ajax
-      url: '/api/items'
-      type: 'POST'
-      dataType: 'json'
-      data: {item: args}
-      headers: {'X-CSRF-Token': @_csrfToken()}
-    .done (data) =>
-      @setState items: data.items
-      @events.trigger 'item:complete'
-    .fail (xhr, status, err) =>
-      console.error status, err.toString()
+    Item = Parse.Object.extend 'ItemObject'
+    item = new Item()
+    item.save(args)
+      .done (data) =>
+        debugger
+        # @setState items: data.items
+        @events.trigger 'item:complete'
+      .fail (xhr, status, err) =>
+        console.error status, err.toString()
 
   _deleteItem: (itemId) ->
     $.ajax
@@ -49,18 +47,20 @@ window.LRItemBox = React.createClass
       console.error status, err.toString()
 
   _fetchData: (args) ->
+    Item = Parse.Object.extend 'ItemObject'
     args ?= {tags: []}
-    $.ajax
-      url: '/api/searches'
-      type: 'POST'
-      dataType: 'json'
-      data: args
-      headers: {'X-CSRF-Token': @_csrfToken()}
-    .done (data) =>
-      @setState items: data.items
-      @events.trigger 'search:complete'
-    .fail (xhr, status, err) =>
-      console.error status, err.toString()
+
+    Item = Parse.Object.extend 'ItemObject'
+    query = new Parse.Query(Item)
+
+    query.equalTo('visible', true)
+
+    query.find()
+      .done (data) =>
+        @setState items: data
+        @events.trigger 'search:complete'
+      .fail (xhr, status, err) =>
+        console.error status, err.toString()
 
   _csrfToken: ->
     @__csrf ?= $('meta[name=csrf-token]').attr('content')

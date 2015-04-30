@@ -1,5 +1,5 @@
 //= require jquery/dist/jquery
-//= require cookies-js/dist/cookies
+//= require parse-js-sdk/lib/parse
 
 //= require react/react
 
