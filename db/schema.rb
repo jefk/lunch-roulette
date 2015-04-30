@@ -11,35 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411062456) do
+ActiveRecord::Schema.define(version: 20150430012908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "item_tags", force: :cascade do |t|
-    t.integer  "item_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "item_tags", ["item_id"], name: "index_item_tags_on_item_id", using: :btree
-  add_index "item_tags", ["tag_id"], name: "index_item_tags_on_tag_id", using: :btree
-
-  create_table "items", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "items", ["name"], name: "index_items_on_name", using: :btree
-
-  create_table "tags", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
 end
