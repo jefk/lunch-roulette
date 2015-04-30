@@ -12,7 +12,7 @@ window.LRItemSearch = React.createClass
     e.preventDefault()
     rawInput = React.findDOMNode(@refs.search).value.trim()
 
-    tags = rawInput.split /\s+/
+    tags = (tag for tag in rawInput.split(/\s+/) when tag.length > 0)
     return unless tags.length > 0
 
     @props.events.trigger 'search:new', tags: tags
