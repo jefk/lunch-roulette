@@ -31,32 +31,32 @@ window.LRItemBox = React.createClass
       .done (data) =>
         @_fetchData()
         @events.trigger 'item:complete'
-      .fail (xhr, status, err) =>
-        console.error status, err.toString()
+      .fail (response) =>
+        console.error response
 
   _deleteItem: (item) ->
     item.set 'visible', false
     item.save()
       .done (data) =>
         @_fetchData()
-      .fail (xhr, status, err) =>
-        console.error status, err.toString()
+      .fail (response) =>
+        console.error response
 
-  _fetchData: (args) ->
-    Item = Parse.Object.extend 'ItemObject'
-    args ?= {tags: []}
+  _fetchData: (options) ->
+    tags = options?.tags || []
 
     Item = Parse.Object.extend 'ItemObject'
+
     query = new Parse.Query(Item)
-
-    query.equalTo 'visible', true
+    query.equalTo('visible', true)
+    query.containsAll('tags', tags) if tags.length > 0
 
     query.find()
       .done (data) =>
         @setState items: data
         @events.trigger 'search:complete'
-      .fail (xhr, status, err) =>
-        console.error status, err.toString()
+      .fail (response) =>
+        console.error response
 
   _csrfToken: ->
     @__csrf ?= $('meta[name=csrf-token]').attr('content')
