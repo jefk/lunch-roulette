@@ -29,22 +29,18 @@ window.LRItemBox = React.createClass
     item = new Item()
     item.save(args)
       .done (data) =>
-        debugger
-        # @setState items: data.items
+        @_fetchData()
         @events.trigger 'item:complete'
       .fail (xhr, status, err) =>
         console.error status, err.toString()
 
-  _deleteItem: (itemId) ->
-    $.ajax
-      url: '/api/items/' + itemId
-      type: 'DELETE'
-      dataType: 'json'
-      headers: {'X-CSRF-Token': @_csrfToken()}
-    .done (data) =>
-      @setState items: data.items
-    .fail (xhr, status, err) =>
-      console.error status, err.toString()
+  _deleteItem: (item) ->
+    item.set 'visible', false
+    item.save()
+      .done (data) =>
+        @_fetchData()
+      .fail (xhr, status, err) =>
+        console.error status, err.toString()
 
   _fetchData: (args) ->
     Item = Parse.Object.extend 'ItemObject'
@@ -53,7 +49,7 @@ window.LRItemBox = React.createClass
     Item = Parse.Object.extend 'ItemObject'
     query = new Parse.Query(Item)
 
-    query.equalTo('visible', true)
+    query.equalTo 'visible', true
 
     query.find()
       .done (data) =>

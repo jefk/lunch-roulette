@@ -7,7 +7,7 @@ window.LRItem = React.createClass
     </div>
 
   didTapDelete: ->
-    @props.events.trigger 'item:delete', @props.item.id
+    @props.events.trigger 'item:delete', @props.item
 
   _tags: ->
     @props.item.attributes.tags.map (tag) ->
