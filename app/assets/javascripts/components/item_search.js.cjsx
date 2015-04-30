@@ -5,9 +5,6 @@ window.LRItemSearch = React.createClass
       <input type="submit" value="Search" />
     </form>
 
-  componentDidMount: ->
-    @props.events.on 'search:complete', => @_clear()
-
   formDidSubmit: (e) ->
     e.preventDefault()
     rawInput = React.findDOMNode(@refs.search).value.trim()
