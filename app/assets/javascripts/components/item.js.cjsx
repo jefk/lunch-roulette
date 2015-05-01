@@ -2,7 +2,7 @@ window.LRItem = React.createClass
   render: ->
     <div className="item-row">
       <h3>{@props.item.attributes.name}</h3>
-      <ul className="inline">{@_tags()}</ul>
+      <ul className="inline tags">{@_tags()}</ul>
       <span className="delete" onClick={@didTapDelete}>x</span>
     </div>
 

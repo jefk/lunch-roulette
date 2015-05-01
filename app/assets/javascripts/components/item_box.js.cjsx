@@ -25,9 +25,7 @@ window.LRItemBox = React.createClass
       @_deleteItem itemId
 
   _createItem: (args) ->
-    Item = Parse.Object.extend 'ItemObject'
-    item = new Item()
-    item.save(args)
+    models.Items.create(args)
       .done (data) =>
         @_fetchData()
         @events.trigger 'item:complete'
@@ -35,23 +33,14 @@ window.LRItemBox = React.createClass
         console.error response
 
   _deleteItem: (item) ->
-    item.set 'visible', false
-    item.save()
+    models.Items.delete(item)
       .done (data) =>
         @_fetchData()
       .fail (response) =>
         console.error response
 
   _fetchData: (options) ->
-    tags = options?.tags || []
-
-    Item = Parse.Object.extend 'ItemObject'
-
-    query = new Parse.Query(Item)
-    query.equalTo('visible', true)
-    query.containsAll('tags', tags) if tags.length > 0
-
-    query.find()
+    models.Items.findByTags(options?.tags)
       .done (data) =>
         @setState items: data
         @events.trigger 'search:complete'
