@@ -10,12 +10,11 @@ class models.Items
     item.set 'visible', false
     item.save()
 
-  @findByTags: (tags, options = {}) ->
+  @findByTags: (tags) ->
     tags ?= []
     query = new Parse.Query @_itemObject()
     query.equalTo('visible', true)
     query.containsAll('tags', tags) if tags.length > 0
-    query.limit(options.limit || 100)
 
     query.find()
 

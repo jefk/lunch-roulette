@@ -40,7 +40,7 @@ window.LRItemBox = React.createClass
         console.error response
 
   _fetchData: (options = {}) ->
-    models.Items.findByTags(options.tags, limit: options.limit)
+    models.Items.findByTags(options.tags)
       .done (data) =>
         @setState items: data
         @events.trigger 'search:complete'

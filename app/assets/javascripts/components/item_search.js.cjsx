@@ -12,15 +12,16 @@ window.LRItemSearch = React.createClass
 
   isFeelingLucky: (event) ->
     event.preventDefault()
-    @_search(1)
+    @_search isFeelingLucky: true
 
-  _search: (limit) ->
+  _search: (options = {}) ->
     rawInput = React.findDOMNode(@refs.search).value.trim()
 
     tags = (tag for tag in rawInput.split(/\s+/) when tag.length > 0)
     return unless tags.length > 0
 
-    @props.events.trigger 'search:new', tags: tags, limit: limit
+    args = $.extend options, tags: tags
+    @props.events.trigger 'search:new', args
 
   _clear: ->
     React.findDOMNode(@refs.search).value = ''
