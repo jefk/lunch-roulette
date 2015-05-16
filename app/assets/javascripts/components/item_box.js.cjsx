@@ -3,7 +3,7 @@ window.LRItemBox = React.createClass
 
   render: ->
     <div className="item-box">
-      <h1>I am the ItemBox</h1>
+      <h1 className="logo">Tomato</h1>
       <LRItemList items={@state.items} events={@events}/>
       <LRItemForm events={@events}/>
       <LRItemSearch events={@events}/>
@@ -13,7 +13,7 @@ window.LRItemBox = React.createClass
     items: []
 
   componentDidMount: ->
-    @_fetchData()
+    @_fetchData isFeelingLucky: true
 
     @events.on 'search:new', (event, searchParams) =>
       @_fetchData searchParams
@@ -48,10 +48,9 @@ window.LRItemBox = React.createClass
         console.error response
 
   _applyLuck: (data, options) ->
+    data.sort -> (0.5 - Math.random())
     return data unless options.isFeelingLucky
-
-    randomIndex = Math.floor(Math.random() * data.length)
-    [data[randomIndex]]
+    data.slice(0,1)
 
   _csrfToken: ->
     @__csrf ?= $('meta[name=csrf-token]').attr('content')

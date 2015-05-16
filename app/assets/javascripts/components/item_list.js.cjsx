@@ -1,7 +1,9 @@
 window.LRItemList = React.createClass
   render: ->
-    <div className="item-list">
-      {@items()}
+    <div className="item-list-wrapper">
+      <div className="item-list">
+        {@items()}
+      </div>
     </div>
 
   items: ->
