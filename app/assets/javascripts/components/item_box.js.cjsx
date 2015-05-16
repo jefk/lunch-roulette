@@ -42,10 +42,16 @@ window.LRItemBox = React.createClass
   _fetchData: (options = {}) ->
     models.Items.findByTags(options.tags)
       .done (data) =>
-        @setState items: data
+        @setState items: @_applyLuck(data, options)
         @events.trigger 'search:complete'
       .fail (response) =>
         console.error response
+
+  _applyLuck: (data, options) ->
+    return data unless options.isFeelingLucky
+
+    randomIndex = Math.floor(Math.random() * data.length)
+    [data[randomIndex]]
 
   _csrfToken: ->
     @__csrf ?= $('meta[name=csrf-token]').attr('content')
